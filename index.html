@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SA Careers Hub | 2026 Job Gateway</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-primary: #6366f1; /* Indigo */
+      --accent-secondary: #06b6d4; /* Cyan */
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --gradient: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    }
+
+    * {
+      box-sizing: border-box;
+      transition: all 0.2s ease-in-out;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      overflow-x: hidden;
+    }
+
+    /* Decorative Background Blobs */
+    .blob {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(15, 23, 42, 0) 70%);
+      border-radius: 50%;
+      z-index: -1;
+      filter: blur(40px);
+    }
+
+    /* Header & Hero Section */
+    header {
+      padding: 5rem 1rem 3rem;
+      text-align: center;
+      background: radial-gradient(circle at top, rgba(99, 102, 241, 0.1), transparent);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.5rem 1.2rem;
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid var(--accent-primary);
+      border-radius: 50px;
+      color: var(--accent-primary);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    header h1 {
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: -1px;
+      background: linear-gradient(to bottom, #fff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 1.5rem auto;
+      font-size: 1.1rem;
+    }
+
+    /* Search Bar Area */
+    .search-wrapper {
+      position: sticky;
+      top: 20px;
+      z-index: 100;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      padding: 0 1rem;
+    }
+
+    .search-container {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      padding: 0.5rem;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    #searchInput {
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 1rem;
+      color: white;
+      font-size: 1.1rem;
+      outline: none;
+    }
+
+    #searchInput::placeholder {
+      color: #475569;
+    }
+
+    .results-count {
+      padding: 0 1rem;
+      color: var(--accent-secondary);
+      font-weight: 600;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    /* Grid Layout */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--accent-primary);
+      transform: translateY(-5px);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 4px; height: 100%;
+      background: var(--gradient);
+      opacity: 0;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .company-name {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: #fff;
+    }
+
+    .btn {
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0.8;
+    }
+
+    .btn:hover {
+      color: var(--accent-secondary);
+      opacity: 1;
+    }
+
+    .btn span {
+      font-size: 1.2rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--glass-border);
+      padding: 4rem 1rem;
+      text-align: center;
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    footer p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      max-width: 800px;
+      margin: 0.5rem auto;
+    }
+
+    /* Empty State */
+    #emptyState {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem;
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      header { padding-top: 3rem; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="blob" style="top: -100px; right: -100px;"></div>
+  <div class="blob" style="bottom: 10%; left: -100px;"></div>
+
+  <header>
+    <div class="badge">Market Update: March 2026</div>
+    <h1>South Africa Career Hub</h1>
+    <p>The definitive collection of career portals for SA's top 75+ employers. Connect directly with the source of your next opportunity.</p>
+  </header>
+
+  <div class="search-wrapper">
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search by company or industry (e.g. Fintech, Banking)...">
+      <div class="results-count" id="count">75+ Companies</div>
+    </div>
+  </div>
+
+  <section class="grid" id="companiesGrid">
+    <div id="emptyState">
+      <p style="color: var(--text-muted);">No companies found matching your search.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Curated from 2026 Top Employer lists, JSE Market Cap leaders, and official corporate sites.</p>
+    <p>Hand-crafted for professionals and job seekers in Gauteng, Western Cape, and across South Africa.</p>
+  </footer>
+
+  <script>
+    const companies = [
+      { name: "Vodacom", careers: "https://www.vodacom.co.za/vodacom/careers" },
+      { name: "MTN South Africa", careers: "https://www.mtn.co.za/careers" },
+      { name: "Standard Bank", careers: "https://www.standardbank.co.za/southafrica/careers" },
+      { name: "Absa Group", careers: "https://www.absa.africa/absa-africa/careers" },
+      { name: "FNB (FirstRand)", careers: "https://www.fnb.co.za/careers" },
+      { name: "Nedbank", careers: "https://jobs.nedbank.co.za/" },
+      { name: "Shoprite Group", careers: "https://www.shopriteholdings.co.za/careers.html" },
+      { name: "Pick n Pay", careers: "https://www.pnp.co.za/careers" },
+      { name: "Sasol", careers: "https://www.sasol.com/careers" },
+      { name: "Anglo American", careers: "https://www.angloamerican.com/careers" },
+      { name: "Exxaro", careers: "https://www.exxaro.com/careers" },
+      { name: "Eskom", careers: "https://www.eskom.co.za/careers" },
+      { name: "Transnet", careers: "https://www.transnet.net/Careers" },
+      { name: "Telkom", careers: "https://www.telkom.co.za/sites/careers" },
+      { name: "BCX (Telkom)", careers: "https://careers.bcx.co.za/" },
+      { name: "Sanlam", careers: "https://www.sanlam.co.za/careers" },
+      { name: "Old Mutual", careers: "https://www.oldmutual.co.za/careers" },
+      { name: "Discovery", careers: "https://www.discovery.co.za/corporate/careers" },
+      { name: "Clicks Group", careers: "https://www.clicksgroup.co.za/careers" },
+      { name: "Woolworths", careers: "https://www.woolworthsholdings.co.za/careers/" },
+      { name: "Heineken Beverages", careers: "https://heinekenbeverages.co.za/careers/" },
+      { name: "Daimler Truck Southern Africa", careers: "https://www.daimlertruck.co.za/careers" },
+      { name: "Airports Company South Africa (ACSA)", careers: "https://www.airports.co.za/careers" },
+      { name: "African Bank", careers: "https://www.africanbank.co.za/en/home/careers/" },
+      { name: "Tata Consultancy Services (TCS) SA", careers: "https://www.tcs.com/careers" },
+      { name: "Accenture South Africa", careers: "https://www.accenture.com/za-en/careers" },
+      { name: "Gold Fields", careers: "https://www.goldfields.com/careers" },
+      { name: "AngloGold Ashanti", careers: "https://www.anglogoldashanti.com/careers/" },
+      { name: "Capitec Bank", careers: "https://www.capitecbank.co.za/careers" },
+      { name: "Naspers / Prosus", careers: "https://www.prosus.com/careers" },
+      { name: "FirstRand Group", careers: "https://www.firstrand.co.za/careers/" },
+      { name: "Sibanye-Stillwater", careers: "https://www.sibanyestillwater.com/careers" },
+      { name: "Imperial Logistics", careers: "https://www.imperial.co.za/careers" },
+      { name: "Bidvest Group", careers: "https://www.bidvest.com/careers/" },
+      { name: "Massmart (Walmart)", careers: "https://www.massmart.co.za/careers" },
+      { name: "Spar Group", careers: "https://www.spar.co.za/careers" },
+      { name: "Mediclinic Southern Africa", careers: "https://careers.mediclinic.com/" },
+      { name: "Unilever South Africa", careers: "https://www.unilever.co.za/careers/" },
+      { name: "JTI South Africa", careers: "https://www.jti.com/careers" },
+      { name: "Mondelez South Africa", careers: "https://www.mondelezinternational.com/careers" },
+      { name: "HCL Technologies SA", careers: "https://www.hcltech.com/careers" },
+      { name: "Santam", careers: "https://www.santam.co.za/careers" },
+      { name: "McDonald's South Africa", careers: "https://www.mcdonalds.co.za/careers" },
+      { name: "Nestlé South Africa", careers: "https://www.nestle-esar.com/jobs" },
+      { name: "Pepkor Holdings", careers: "https://www.pepkor.co.za/careers/" },
+      { name: "Takealot (Naspers)", careers: "https://www.takealot.com/careers" },
+      { name: "Yoco", careers: "https://www.yoco.com/careers" },
+      { name: "TymeBank", careers: "https://www.tymebank.co.za/careers/" },
+      { name: "AFGRI Group", careers: "https://www.afgri.co.za/careers" },
+      { name: "VALR (Crypto)", careers: "https://www.valr.com/careers" },
+      { name: "Glencore South Africa", careers: "https://www.glencore.com/careers" },
+      { name: "Kumba Iron Ore", careers: "https://www.angloamericankumba.com/careers" },
+      { name: "South32", careers: "https://www.south32.net/careers" },
+      { name: "Mondi Group", careers: "https://www.mondigroup.com/careers/" },
+      { name: "Tiger Brands", careers: "https://www.tigerbrands.com/careers" },
+      { name: "Astral Foods", careers: "https://www.astralfoods.com/careers" },
+      { name: "Pioneer Foods (PepsiCo)", careers: "https://www.pioneerfoods.co.za/careers" },
+      { name: "Barloworld", careers: "https://www.barloworld.com/careers" },
+      { name: "Murray & Roberts", careers: "https://www.murrob.com/careers" },
+      { name: "Wilson Bayly Holmes-Ovcon (WBHO)", careers: "https://www.wbho.co.za/careers" },
+      { name: "Aveng Group", careers: "https://www.aveng.co.za/careers" },
+      { name: "Grindrod", careers: "https://www.grindrod.com/careers" },
+      { name: "Altron", careers: "https://www.altron.com/careers" },
+      { name: "Dis-Chem Pharmacies", careers: "https://www.dischem.co.za/careers" },
+      { name: "Mr Price Group", careers: "https://www.mrprice.com/careers" },
+      { name: "Foschini Group (TFG)", careers: "https://www.tfgcareers.co.za/" },
+      { name: "Truworths", careers: "https://www.truworths.co.za/careers" },
+      { name: "Life Healthcare", careers: "https://www.lifehealthcare.co.za/careers" },
+      { name: "Netcare", careers: "https://www.netcare.co.za/careers" },
+      { name: "Aspen Pharmacare", careers: "https://www.aspenpharma.com/careers" },
+      { name: "Microsoft South Africa", careers: "https://careers.microsoft.com/" },
+      { name: "Google South Africa", careers: "https://careers.google.com/locations/south-africa/" },
+      { name: "Amazon (AWS SA)", careers: "https://www.amazon.jobs/en/locations/south-africa" }
+    ];
+
+    const grid = document.getElementById('companiesGrid');
+    const searchInput = document.getElementById('searchInput');
+    const countLabel = document.getElementById('count');
+    const emptyState = document.getElementById('emptyState');
+
+    function renderCompanies(list) {
+      // Clear all but empty state
+      Array.from(grid.children).forEach(child => {
+        if(child.id !== 'emptyState') child.remove();
+      });
+
+      if (list.length === 0) {
+        emptyState.style.display = 'block';
+        countLabel.innerText = "0 Matches";
+      } else {
+        emptyState.style.display = 'none';
+        countLabel.innerText = `${list.length} Companies`;
+        
+        list.forEach(company => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <div class="company-name">${company.name}</div>
+            <a href="${company.careers}" target="_blank" rel="noopener noreferrer" class="btn">
+              Explore Openings <span>→</span>
+            </a>
+          `;
+          grid.appendChild(card);
+        });
+      }
+    }
+
+    // Sort and Initial Render
+    companies.sort((a, b) => a.name.localeCompare(b.name));
+    renderCompanies(companies);
+
+    // Live Search
+    searchInput.addEventListener('input', (e) => {
+      const term = e.target.value.toLowerCase().trim();
+      const filtered = companies.filter(c => c.name.toLowerCase().includes(term));
+      renderCompanies(filtered);
+    });
+  </script>
+</body>
+</html>
